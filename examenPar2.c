@@ -1,200 +1,127 @@
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 
-struct Dato {
-    int d;
-    struct Dato *Ptrsig;
+struct Nodo {
+    int n;
+    struct Nodo *Ptrant;
+    struct Nodo *Ptrsig;
 };
 
-struct Dato* crearDato(void) {
-    struct Dato *Ptrtemp = NULL; 
-    Ptrtemp = (struct Dato*) malloc(sizeof(struct Dato));
-    
-    if (Ptrtemp == NULL) {
-        printf("Error\n"); 
-        return NULL;    
-    }
+struct Nodo *Ptrtemp = NULL;
 
-    printf("Ingresa el valor del dato: ");
-    scanf("%d", &Ptrtemp -> d);
-    Ptrtemp -> Ptrsig = NULL;
-    return Ptrtemp; 
-}
+void insertar(int valor) {
+    struct Nodo *Ptrnew;
+    Ptrnew = (struct Nodo*) malloc(sizeof(struct Nodo));
 
-void Buscar (struct Dato *Ptr) {}
-    struct Dato *Ptraux = Ptr;
+    if(Ptrnew == NULL) {
+        printf("Error no se pudo reserver memoria\n");
+        return;
+    }
+    Ptrnew ->  n = dato;
 
-    int BuscarDato; 
-    int Encontrar  = 0;
-    int lugar = 1; 
-    if (Ptr == NULL){
-        printf("No hay nada"); 
-        return; 
+    if(Ptrtemp == NULL) {
+
+        Ptrnew -> Ptrsig = Ptrnew;
+        Ptrnew -> Ptrant = Ptrnew;
+        Ptrtemp = Ptrnew;
     }
-     
-        struct Dato *Ptraux = Ptr; 
-        while (Ptraux != NULL){
-            if (Ptraux -> d == BuscarDato) {
-            printf("Dato %d", Dato); 
-            Dato = 1; 
-        }
-        Ptraux = Ptraux -> Ptrsig; 
-        Lugar++
-    }
-    if (!Dato){
-        printf("El dato no se pudo encontrar", Dato); 
+    else {
+        struct Nodo *Ptraux;
+
+        Ptraux = Ptrtemp -> Ptrant;
+        Ptrnew -> Ptrsig = Ptrtemp;
+        Ptrnew -> Ptrant = Ptraux;
+        Ptraux -> Ptrsig = Ptrnew;
+        Ptrtemp -> Ptrant = Ptrnew;
     }
 }
 
-void Contar (int cont) {
-    printf("Hay %d de Nodos", cont); 
-}
+void eliminar(int valor) {
 
-void Ordenar (struct Dato **Ptr){
-    struct Dato *Ptraux = Ptr; 
+    if(Ptrtemp == NULL) {
+        printf("No hay nada en la lista\n");
+        return;
+    }
 
-    struct Dato *Ptraux; 
-    struct Dato *Ptrant;
-    struct Dato *Ptrtemp; 
-    int cambiar; 
-    
-    if (Ptraux -> Dato > (Ptraux -> Ptrsig) -> Dato){
-       do {
-        cambiar = 0;
-        Ptraux = *Ptr;
-        Ptrant = NULL;
-
-        while (Ptraux->Ptrsig != NULL) {
-            if (Ptraux->d > Ptraux->Ptrsig->d) {
-
-                Ptrtemp = Ptraux->Ptrsig;
-                Ptraux->Ptrsig = Ptrtemp->Ptrsig;
-                Ptrtemp->Ptrsig = Ptraux;
-
-                if (Ptrant == NULL) {
-                    *Ptr = Ptrtemp;
-                } else {
-                    Ptrant->Ptrsig = Ptrtemp;
-                }
-                Ptrant = Ptrtemp;
-                cambiar = 1;
-            } else {
-                Ptrant = Ptraux;
-                Ptraux = Ptraux->Ptrsig;
-            }
-        }
-    } while (cambiar);
-
-int main(void) {
-    struct Dato *Ptr = NULL; 
-    struct Dato *Ptrtemp = NULL;
-    struct Dato *Ptraux = NULL; 
-    int opcion, op1, op2;
-    int cont = 0; 
+    struct Nodo *Ptraux;
+    Ptraux = Ptrtemp;
 
     do {
-        printf("\nMENU PRINCIPAL:\n");
-        printf("1 - Crear dato\n");
-        printf("2 - Funciones\n"); 
-        printf("3 - Mostrar dato\n"); 
-        printf("4 - Liberar memoria\n");
-        printf("5 - Salir\n");
-        printf("\nElija una opción: ");
+
+        if(Ptraux -> n == dato) {
+            if(Ptraux -> Ptrsig == Ptraux) {
+                Ptrtemp = NULL;
+            }
+            else {
+                Ptraux -> Ptrant -> Ptrsig = Ptraux -> Ptrsig;
+                Ptraux -> Ptrsig -> Ptrant = Ptraux -> Ptrant;
+
+                if(Ptraux == Ptrtemp) {
+                    Ptrtemp = Ptraux -> Ptrsig;
+                }
+            }
+            free(Ptraux);
+            return;
+        }
+        Ptraux = Ptraux -> Ptrsig;
+
+    } while(Ptraux != Ptrtemp);
+    printf("No se encontro nada\n");
+}
+
+void mostrar() {
+    if(Ptrtemp == NULL) {
+        printf("Todavía no hay nada en la lista\n");
+        return;
+    }
+
+    struct Nodo *Ptraux;
+    Ptraux = Ptrtemp;
+    printf("\nDATOS\n");
+
+    do {
+        printf("%d ->", Ptraux -> n);
+        Ptraux = Ptraux -> Ptrsig;
+
+    } while(Ptraux != Ptrtemp);
+}
+
+int main() {
+    int opcion;
+    int dato;
+
+    do {
+        printf("\nMENú\n");
+        printf("1 - Insertar elemento\n");
+        printf("2 - Eliminar elemento\n");
+        printf("3 - Mostrar elementos\n");
+        printf("4 - Salir\n");
+        printf("Elija una opción de chava: ");
         scanf("%d", &opcion);
 
-        switch (opcion) {
-        case 1:
-                Ptrtemp = crearDato(); 
-                if (Ptrtemp == NULL){
-                    printf("Error\n");         
-                } else {
-                    if(Ptr == NULL){
-                       Ptr = Ptrtemp;
-                    } else {
-                       Ptraux = Ptr;
-                       while(Ptraux -> Ptrsig != NULL){ 
-                           Ptraux = Ptraux -> Ptrsig;
-                       }
-                       Ptraux -> Ptrsig = Ptrtemp;
-                    }
-                }
-                cont++;
+        switch(opcion) {
+            case 1:
+                printf("Ingrese un dato");
+                scanf("%d", &dato);
+                insertar(dato);
                 break;
-                
-        case 2: 
-                do {
-                    printf("\nSUB-MENÚ-1\n");
-                    printf("1 - Buscar\n");
-                    printf("2 - Contar\n");
-                    printf("3 - Reemplazar\n"); 
-                    printf("4 - Ordenar\n"); 
-                    printf("5 - Regresar al menú principal\n");
-                    printf("\nElige una opción: ");
-                    scanf("%d", &op1);
 
-                    switch(op1) {
-                        case 1: 
-                            Buscar(Ptr);
-                            break;
-                        case 2:
-                            Contar(cont); 
-                            break;
-                        case 3:
-                            printf("\n");
-                            break;
-                        case 4: 
-                            printf("\n"); 
-                            break; 
-                        case 5: 
-                            printf("\n");
-                            break; 
-                        }
-                    } while(op1 != 5);
+            case 2:
+                eliminar();
+                break;
 
-                    break;
-        
-        case 3:
-                if (Ptr == NULL) {
-                    printf("No hay nada\n"); 
-                } else {
-                    printf("\nDATOS\n"); 
-                    Ptraux = Ptr; 
-                    while(Ptraux != NULL){ 
-                        printf("%d -> ", Ptraux -> d); 
-                        Ptraux = Ptraux -> Ptrsig; 
-                    }
-                }
+            case 3:
+                mostrar();
                 break;
-                
-        case 4:
-                if(Ptr == NULL){ 
-                     printf("No hay nada\n"); 
-                         
-                } else if (Ptr -> Ptrsig == NULL){ 
-                     free(Ptr); 
-                     Ptr = NULL; 
-                        
-                } else { 
-                    Ptraux = Ptr; 
-                    while((Ptraux -> Ptrsig) -> Ptrsig != NULL){
-                        Ptraux = Ptraux -> Ptrsig; 
-                    }
-                    free(Ptraux -> Ptrsig);
-                    Ptraux -> Ptrsig = NULL; 
-                }
-                cont--;
-                break;
-                
-        case 5:
-                while (Ptr != NULL) {
-                    Ptrtemp = Ptr -> Ptrsig; 
-                    free(Ptr); 
-                    Ptr = Ptrtemp; 
-                }
+
+            case 4:
                 printf("Saliendo...\n");
                 break;
+
+            default:
+                printf("Opcion invalida\n");
         }
-    } while (opcion != 5);
+    } while(opcion != 4);
 
     return 0;
 }
