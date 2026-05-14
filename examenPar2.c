@@ -11,7 +11,7 @@ struct Dato* crearDato(void) {
     Ptrtemp = (struct Dato*) malloc(sizeof(struct Dato));
     
     if (Ptrtemp == NULL) {
-        printf("Errorcito\n"); 
+        printf("Error\n"); 
         return NULL;    
     }
 
