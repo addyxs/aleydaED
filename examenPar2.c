@@ -28,7 +28,7 @@ void Buscar (struct Dato *Ptr) {}
     int Encontrar  = 0;
     int lugar = 1; 
     if (Ptr == NULL){
-        printf("No hay nada, triste"); 
+        printf("No hay nada"); 
         return; 
     }
      
@@ -42,7 +42,7 @@ void Buscar (struct Dato *Ptr) {}
         Lugar++
     }
     if (!Dato){
-        printf("El dato no se pudo encontrar, pipipipi", Dato); 
+        printf("El dato no se pudo encontrar", Dato); 
     }
 }
 
@@ -106,7 +106,7 @@ int main(void) {
         case 1:
                 Ptrtemp = crearDato(); 
                 if (Ptrtemp == NULL){
-                    printf("Error de chava...\n");         
+                    printf("Error\n");         
                 } else {
                     if(Ptr == NULL){
                        Ptr = Ptrtemp;
@@ -126,7 +126,7 @@ int main(void) {
                     printf("\nSUB-MENÚ-1\n");
                     printf("1 - Buscar\n");
                     printf("2 - Contar\n");
-                    printf("3 - Reemplazar\n"); //Primero busca un dato y luego lo reemplaza...
+                    printf("3 - Reemplazar\n"); 
                     printf("4 - Ordenar\n"); 
                     printf("5 - Regresar al menú principal\n");
                     printf("\nElige una opción: ");
@@ -155,7 +155,7 @@ int main(void) {
         
         case 3:
                 if (Ptr == NULL) {
-                    printf("No hay nothing de chava :(\n"); 
+                    printf("No hay nada\n"); 
                 } else {
                     printf("\nDATOS\n"); 
                     Ptraux = Ptr; 
@@ -168,7 +168,7 @@ int main(void) {
                 
         case 4:
                 if(Ptr == NULL){ 
-                     printf("No hay nothing de chava...\n"); 
+                     printf("No hay nada\n"); 
                          
                 } else if (Ptr -> Ptrsig == NULL){ 
                      free(Ptr); 
@@ -191,7 +191,7 @@ int main(void) {
                     free(Ptr); 
                     Ptr = Ptrtemp; 
                 }
-                printf("Saliendo, bye, see you\n");
+                printf("Saliendo...\n");
                 break;
         }
     } while (opcion != 5);
