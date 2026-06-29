@@ -20,7 +20,7 @@ int altas(struct Persona **ptr){
 
     P = nuevaPersona();
     if(P == NULL){
-        printf("Error, no se pudo crear :(");
+        printf("Error, no se pudo crear");
         b = 0; 
     }else{
         A = nuevoAlumno();
