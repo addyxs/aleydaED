@@ -9,19 +9,20 @@ int bajaPersona(struct Persona **ptr);
 int bajaPersonas(struct Persona **ptr);
 int bajaGeneral(struct Persona **ptr);
 
-int bajaPersona(struct Persona **ptr){
-    struct Persona *ptrAux;
+int bajaPersona(struct Persona **ptr)
+{
+    struct Persona *ptraux;
     if(*ptr == NULL){
-        printf("No hay personas\n");
+        printf("\nNo hay personas registradas.\n");
         return 0;
     }
+    ptraux = *ptr;
+    *ptr = ptraux->ptrSig;
+    free(ptraux->nombre);
+    free(ptraux->ptrAlum);
+    free(ptraux);
 
-    ptrAux = *ptr;
-    *ptr = ptrAux->ptrSig;
-    free(ptrAux->nombre);
-    free(ptrAux->ptrAlum);
-    free(ptrAux);
-    printf("Se elimino a la persona");
+    printf("\nSe elimino a la persona.\n");
 
     return 0;
 }
