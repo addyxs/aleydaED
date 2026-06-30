@@ -5,7 +5,7 @@ struct Alumno{
     char matricula[11];
     int carrera;
     int semestre;
-    char correo[20];
+    char correo[30];
     float calif[5][5];
 };
 
