@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "structs.h"
 #include "menu.h"
 #include "altas.h"
 #include "bajas.h"
-#include "structs.h"
 #include "mostrar.h"
     
 
